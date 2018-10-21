@@ -98,23 +98,22 @@ const movies = {
 };
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">ReactND - Coding Practice</h1>
-        </header>
-        <h2>How Popular is Your Favorite Movie?</h2>
-		<div>
-		{Object.keys(movies).map(key => 
-        	return (<p>movies[key].name</p>)
-       		
-       	))}
-		</div>
-      </div>
-    );
-  }
+	constructor(props) {
+    	super(props);
+      	this.usersByMovie = {};
+      	
+      	profiles.forEach(profile => {
+        	const movieID = profile.favoriteMovieID;
+          
+          //just pushing up users favorited movie w/ corresponding movieID	
+          if (this.usersByMovie[movieID]) {
+          	this.usersByMovie[movieID].push(profile.userID);
+          } else {
+          	this.usersByMovie[movieID] = [profile.userID];
+          }
+        });
+      console.log(this.usersByMovie)
+    }
 }
 
 export default App;
